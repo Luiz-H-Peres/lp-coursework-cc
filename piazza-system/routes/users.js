@@ -1,18 +1,24 @@
+// Import the Express library
 const express = require('express');
-const router = express.Router(); // Create a new router instance
 
-// POST route to create a new user
+// Create a new router instance
+const router = express.Router();
+
+// Define a POST route to create a new user
+// This route will handle POST requests to the `/users/create` endpoint
 router.post('/create', (req, res) => {
-  // Extract name and email from the request body
+  // Destructure the `name` and `email` fields from the request body
   const { name, email } = req.body;
 
-  // Check if name and email are provided
+  // Check if both `name` and `email` are provided in the request
   if (!name || !email) {
+    // If not, return a 400 Bad Request status with an error message
     return res.status(400).send('Name and email are required!');
   }
 
-  // Respond with a success message
+  // If both fields are present, send a success message back to the client
   res.send(`User ${name} with email ${email} created!`);
 });
 
-module.exports = router; // Export the router for use in other files
+// Export the router so it can be used in the main app
+module.exports = router;
